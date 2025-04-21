@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Markmix HomePage</title>
   <style>
     body {
@@ -31,17 +31,44 @@
       margin-bottom: 2rem;
     }
 
-    input[type="text"] {
-      width: 80%;
-      max-width: 400px;
-      padding: 10px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
+    form {
+      position: relative;
+      width: 90%;
+      max-width: 500px;
+      margin-bottom: 2rem;
     }
 
-    form {
-      margin-bottom: 2rem;
+    #searchInput {
+      width: 100%;
+      padding: 12px 40px 12px 36px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background-color: #1c1c1c;
+      color: #eee;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .search-icon,
+    .clear-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+      color: #bbb;
+      z-index: 2;
+    }
+
+    .search-icon {
+      left: 12px;
+    }
+
+    .clear-btn {
+      right: 12px;
+      cursor: pointer;
+      display: none;
     }
 
     .links {
@@ -69,63 +96,18 @@
 <body>
   <h1>Welcome, Nana Kwadwo</h1>
   <div id="clock"></div>
-<form action="https://www.google.com/search" method="GET" style="position: relative; display: inline-block; width: 100%;">
-  <!-- Search Icon -->
-  <span style="
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    color: #bbb;
-  ">🔍</span>
 
-  <!-- Search Input -->
-  <input id="searchInput" type="text" name="q" placeholder="Type & Press Enter to Search on Google..." autofocus style="
-    width: 100%;
-    max-width: 500px;
-    padding: 12px 40px 12px 36px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #444;
-    background-color: #1c1c1c; /* Almost black */
-    color: #eee; /* Light text */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    outline: none;
-  ">
+  <form action="https://www.google.com/search" method="GET">
+    <span class="search-icon">🔍</span>
+    <input id="searchInput" type="text" name="q" placeholder="Type & Press Enter to Search on Google..." autofocus />
+    <span id="clearBtn" class="clear-btn" onclick="clearSearch()">&times;</span>
+  </form>
 
-  <!-- Clear (×) Button -->
-  <span id="clearBtn" onclick="clearSearch()" style="
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.3rem;
-    cursor: pointer;
-    color: #bbb;
-    display: none;
-  ">&times;</span>
-</form>
-
-<script>
-  const input = document.getElementById("searchInput");
-  const clearBtn = document.getElementById("clearBtn");
-
-  input.addEventListener("input", () => {
-    clearBtn.style.display = input.value ? "block" : "none";
-  });
-
-  function clearSearch() {
-    input.value = "";
-    input.focus();
-    clearBtn.style.display = "none";
-  }
-  </script>
   <div class="links">
     <a href="https://searx.org" target="_blank">SearXNG Search</a>
     <a href="https://mail.google.com" target="_blank">Gmail</a>
-    <a href="https://blogger.com" target="_blank">Blogger</a>
-     <a href="https://markmixstudios.com" target="_blank">Markmix Studios</a>
+    <a href="https://google.com" target="_blank">Blogger</a>
+    <a href="https://markmixstudios.com" target="_blank">Markmix Studios</a>
     <a href="https://radio.markmixstudios.com" target="_blank">Markmix Radio</a>
   </div>
 
@@ -138,6 +120,19 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
+
+    const input = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("clearBtn");
+
+    input.addEventListener("input", () => {
+      clearBtn.style.display = input.value ? "block" : "none";
+    });
+
+    function clearSearch() {
+      input.value = "";
+      input.focus();
+      clearBtn.style.display = "none";
+    }
   </script>
 </body>
 </html>
