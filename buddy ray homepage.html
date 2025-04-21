@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buddy Ray's Private Home</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      color: #fff;
+      background: url('https://cdn.jsdelivr.net/gh/bismarkagyapong/files@refs/heads/main/nice-desktop-picture.webp') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      backdrop-filter: brightness(0.6);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    #clock {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      max-width: 400px;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+
+    form {
+      margin-bottom: 2rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .links a {
+      color: #00ccff;
+      text-decoration: none;
+      font-size: 1rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .links a:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome, Buddy</h1>
+  <div id="clock"></div>
+
+  <form action="https://www.google.com/search" method="GET">
+    <input type="text" name="q" placeholder="Search Google..." autofocus>
+  </form>
+
+  <div class="links">
+    <a href="https://searx.org" target="_blank">SearXNG Search</a>
+    <a href="https://mail.google.com" target="_blank">Gmail</a>
+    <a href="https://youtube.com" target="_blank">YouTube</a>
+     <a href="https://markmixstudios.com" target="_blank">Markmix Studios</a>
+    <a href="https://radio.markmixstudios.com" target="_blank">Markmix Radio</a>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString();
+      const date = now.toDateString();
+      document.getElementById("clock").textContent = `${date} • ${time}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
