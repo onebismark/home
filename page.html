@@ -124,7 +124,12 @@
   <script>
     function updateClock() {
       const now = new Date();
-      const time = now.toLocaleTimeString();
+      const time = now.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+      });
       const date = now.toDateString();
       document.getElementById("clock").textContent = `${date} • ${time}`;
     }
@@ -145,4 +150,4 @@
     }
   </script>
 </body>
-</html>
+  </html>
