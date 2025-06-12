@@ -148,20 +148,21 @@
   function updateClock() {
     const now = new Date();
 
+    // Format: Wed, 4th June, 2025
     const dayName = now.toLocaleDateString(undefined, { weekday: 'short' });
     const day = now.getDate();
+    const ordinal = getOrdinalSuffix(day);
     const month = now.toLocaleString(undefined, { month: 'long' });
     const year = now.getFullYear();
-    const ordinal = getOrdinalSuffix(day);
     const dateStr = `${dayName}, ${day}${ordinal} ${month}, ${year}`;
 
+    // Format: 03:21:05 PM
     let hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12;
-
     const timeStr = `${hours}:${minutes}:${seconds} ${ampm}`;
 
     document.getElementById("clock").textContent = `${dateStr} • ${timeStr}`;
@@ -170,6 +171,7 @@
   setInterval(updateClock, 1000);
   updateClock();
 
+  // Search bar clear logic
   const input = document.getElementById("searchInput");
   const clearBtn = document.getElementById("clearBtn");
 
@@ -182,6 +184,6 @@
     input.focus();
     clearBtn.style.display = "none";
   }
-  </script>
+      </script>
 </body>
   </html>
