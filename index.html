@@ -134,34 +134,54 @@
     <a href="https://msl.markmixstudios.com">MSL</a>
     <a href="https://bismarkagyapong.com">The GSN</a>
   </div>
-
-  <script>
-    function updateClock() {
-      const now = new Date();
-      const time = now.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: true
-      });
-      const date = now.toDateString();
-      document.getElementById("clock").textContent = `${date} • ${time}`;
+<script>
+  function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+  }
 
-    const input = document.getElementById("searchInput");
-    const clearBtn = document.getElementById("clearBtn");
+  function updateClock() {
+    const now = new Date();
 
-    input.addEventListener("input", () => {
-      clearBtn.style.display = input.value ? "block" : "none";
-    });
+    const dayName = now.toLocaleDateString(undefined, { weekday: 'short' });
+    const day = now.getDate();
+    const month = now.toLocaleString(undefined, { month: 'long' });
+    const year = now.getFullYear();
+    const ordinal = getOrdinalSuffix(day);
+    const dateStr = `${dayName}, ${day}${ordinal} ${month}, ${year}`;
 
-    function clearSearch() {
-      input.value = "";
-      input.focus();
-      clearBtn.style.display = "none";
-    }
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+
+    const timeStr = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+    document.getElementById("clock").textContent = `${dateStr} • ${timeStr}`;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  const input = document.getElementById("searchInput");
+  const clearBtn = document.getElementById("clearBtn");
+
+  input.addEventListener("input", () => {
+    clearBtn.style.display = input.value ? "block" : "none";
+  });
+
+  function clearSearch() {
+    input.value = "";
+    input.focus();
+    clearBtn.style.display = "none";
+  }
   </script>
 </body>
   </html>
