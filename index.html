@@ -1,166 +1,533 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><!-- Standard Favicons -->
-<link href='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/favicon-16x16.png' rel='icon' sizes='16x16' type='image/png'/>
-<link href='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/favicon-32x32.png' rel='icon' sizes='32x32' type='image/png'/>
-<link href='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/favicon-96x96.png' rel='icon' sizes='96x96' type='image/png'/>
-<link href='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/web-app-manifest-192x192.png' rel='icon' sizes='192x192' type='image/png'/>
-<link href='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/web-app-manifest-512x512.png' rel='icon' sizes='512x512' type='image/png'/>
-
-<!-- Apple Devices -->
-<link href='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/apple-touch-icon.png' rel='apple-touch-icon' sizes='180x180'/>
-
-<!-- Windows Tiles -->
-<meta content='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/favicon-144.png' name='msapplication-TileImage'/>
-<meta content='#ffffff' name='msapplication-TileColor'/>
-
-<!-- Fallback .ico -->
-<link href='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/favicon.ico' rel='icon' type='image/x-icon'/>
-
-<!-- Web Manifest for Progressive Web App Support -->
-<link href='https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/site.webmanifest' rel='manifest'/>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>♔𝑳𝒐𝒓𝒅 𝑩𝒊𝒔𝒎𝒂𝒓𝒒 — Homepage</title>
+<html lang="en" aria-label="Personal homepage">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>♔ Lord Bismark — Homepage</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/Markmix-Studios/msl-favicons/favicon.ico">
+  
   <style>
-    body {
+    /* Base Styles */
+    :root {
+      --primary: #3a86ff;
+      --primary-hover: #2667cc;
+      --text-light: #f8f9fa;
+      --text-dark: #1a1a1a;
+      --card-bg: rgba(30, 30, 30, 0.92);
+      --card-bg-light: rgba(255, 255, 255, 0.92);
+      --radius: 14px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      font-family: "Segoe UI", sans-serif;
-      color: #fff;
-      background: url('https://cdn.jsdelivr.net/gh/bismarkagyapong/files@refs/heads/main/nice-desktop-picture.webp') no-repeat center center fixed;
-      background-size: cover;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-light);
+      background: url('https://cdn.jsdelivr.net/gh/bismarkagyapong/files@main/nice-desktop-picture.webp') no-repeat center/cover fixed;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      backdrop-filter: brightness(0.6);
+      padding: 1rem;
+      line-height: 1.5;
       text-align: center;
     }
 
+    body.light-mode {
+      color: var(--text-dark);
+      --card-bg: var(--card-bg-light);
+    }
+
+    .container {
+      width: min(100%, 800px);
+      padding: 2rem;
+    }
+
     h1 {
-      font-size: 2rem;
-      margin-bottom: 0.2rem;
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: inherit;
+      text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 1px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    body.light-mode h1 {
+      text-shadow: 
+        0 1px 3px rgba(255, 255, 255, 0.3),
+        0 1px 1px rgba(255, 255, 255, 0.2);
     }
 
     #clock {
-      font-size: 1.2rem;
+      font-size: clamp(1.2rem, 4vw, 1.4rem);
       margin-bottom: 2rem;
+      color: inherit;
+      opacity: 0.95;
+      letter-spacing: 0.5px;
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+      text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 1px 1px rgba(0, 0, 0, 0.2);
     }
 
-    form {
+    body.light-mode #clock {
+      text-shadow: 
+        0 1px 3px rgba(255, 255, 255, 0.3),
+        0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .search-container {
       position: relative;
-      width: 90%;
-      max-width: 500px;
-      margin-bottom: 2rem;
+      width: min(100%, 600px);
+      margin: 0 auto 2.5rem;
     }
 
     #searchInput {
       width: 100%;
-      padding: 12px 40px 12px 36px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #444;
-      background-color: #1c1c1c;
-      color: #eee;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      padding: 0.9rem 2.5rem;
+      font-size: clamp(0.9rem, 3.5vw, 1rem);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(20, 20, 20, 0.9);
+      color: var(--text-light);
       outline: none;
-      box-sizing: border-box;
+      box-shadow: var(--shadow);
+      transition: all 0.2s ease;
+      text-align: center;
     }
 
-    .search-icon,
-    .clear-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.3rem;
-      color: #bbb;
-      z-index: 2;
+    body.light-mode #searchInput {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-dark);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    #searchInput:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.3);
     }
 
     .search-icon {
-      left: 12px;
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.7);
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+    }
+
+    body.light-mode .search-icon {
+      color: rgba(0, 0, 0, 0.6);
     }
 
     .clear-btn {
-      right: 12px;
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
       cursor: pointer;
+      font-size: 1.2rem;
       display: none;
-    }
-
-    .links {
-      display: flex;
-      flex-wrap: wrap;
+      width: 20px;
+      height: 20px;
+      align-items: center;
       justify-content: center;
-      gap: 15px;
+      transition: color 0.2s ease;
     }
 
-    .links a {
-      color: #00ccff;
+    body.light-mode .clear-btn {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .clear-btn:hover {
+      color: inherit;
+    }
+
+    /* Enhanced Link Cards */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1.25rem;
+      width: 100%;
+      max-width: 800px;
+      padding: 0.5rem;
+    }
+
+    .link-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
       text-decoration: none;
-      font-size: 1rem;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: 0.3s;
+      color: inherit;
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transform: translateY(0);
+      overflow: hidden;
+      position: relative;
     }
 
-    .links a:hover {
-      background: rgba(0, 0, 0, 0.7);
+    .link-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.15),
+        0 6px 6px rgba(0, 0, 0, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .link-card:hover::before {
+      opacity: 1;
+    }
+
+    .link-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+      transition: transform 0.3s ease;
+    }
+
+    .link-card:hover .link-icon {
+      transform: scale(1.1);
+    }
+
+    .link-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      text-align: center;
+      margin-top: 0.25rem;
+      color: inherit;
+      position: relative;
+      z-index: 1;
+    }
+
+    body.light-mode .link-card {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    body.light-mode .link-card:hover {
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    body.light-mode .theme-toggle {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    body.light-mode .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .search-hint {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: -1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Focus styles */
+    a:focus-visible, 
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5rem;
+      }
+      
+      .links-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 1rem;
+      }
+      .link-card {
+        padding: 1.25rem 0.75rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .links-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .link-card {
+        padding: 1.1rem 0.5rem;
+        gap: 0.75rem;
+      }
+      .link-icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    @media (max-width: 320px) {
+      #clock {
+        font-size: 1.1rem;
+      }
+      
+      .link-text {
+        font-size: 0.75rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Welcome, Bismark</h1>
-  <div id="clock"></div>
+  <button class="theme-toggle" aria-label="Toggle dark mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/>
+    </svg>
+  </button>
 
-  <form action="https://www.google.com/search" method="GET">
-    <span class="search-icon">🔍</span>
-    <input id="searchInput" type="text" name="q" placeholder="Search on Google..." autofocus />
-    <span id="clearBtn" class="clear-btn" onclick="clearSearch()">&times;</span>
-  </form>
+  <div class="container">
+    <h1 id="greeting">Welcome, Bismark</h1>
+    <div id="clock"></div>
+    <div class="search-hint">Press "/" to search</div>
 
-  <div class="links">
-    <a href="https://start.markmixstudios.com/search-engines">Search Engines List</a>
-    <a href="https://me.markmixstudios.com/">My BioLink</a>
-    <a href="https://youtube.com">YouTube</a>
-    <a href="https://mail.google.com">Gmail</a>
-    <a href="https://github.com/markmix-studios">My Github</a>
-    <a href="https://blogger.com">Blogger</a>
-    <a href="https://markmixstudios.com">Markmix Studios</a>
-    <a href="https://radio.markmixstudios.com">Markmix Radio</a>
-    <a href="https://markmixstudios.com/p/blog-page.html">MSL Blog Page</a>
-    <a href="https://msl.markmixstudios.com">MSL</a>
-    <a href="https://bismarkagyapong.com">The GSN</a>
+    <div class="search-container">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <form id="searchForm">
+        <input id="searchInput" type="text" placeholder="Search or enter URL..." autofocus>
+        <button id="clearBtn" class="clear-btn" type="button" aria-label="Clear search">&times;</button>
+      </form>
+    </div>
+
+    <div class="links-grid">
+      <a href="https://start.markmixstudios.com/search-engines" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=start.markmixstudios.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">Search Engines</span>
+      </a>
+      <a href="https://me.markmixstudios.com/" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=me.markmixstudios.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">My BioLink</span>
+      </a>
+      <a href="https://youtube.com" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=youtube.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">YouTube</span>
+      </a>
+      <a href="https://mail.google.com" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=gmail.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">Gmail</span>
+      </a>
+      <a href="https://github.com/markmix-studios" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=github.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">GitHub</span>
+      </a>
+      <a href="https://blogger.com" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=blogger.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">Blogger</span>
+      </a>
+      <a href="https://markmixstudios.com" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=markmixstudios.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">Markmix Studios</span>
+      </a>
+      <a href="https://radio.markmixstudios.com" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=radio.markmixstudios.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">Markmix Radio</span>
+      </a>
+      <a href="https://markmixstudios.com/p/blog-page.html" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=markmixstudios.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">MSL Blog</span>
+      </a>
+      <a href="https://msl.markmixstudios.com" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=msl.markmixstudios.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">MSL</span>
+      </a>
+      <a href="https://bismarkagyapong.com" class="link-card">
+        <img src="https://www.google.com/s2/favicons?domain=bismarkagyapong.com" class="link-icon" alt="" loading="lazy">
+        <span class="link-text">The GSN</span>
+      </a>
+    </div>
   </div>
-<script>  
-    function updateClock() {  
-      const now = new Date();  
-      const time = now.toLocaleTimeString('en-US', {  
-        hour: 'numeric',  
-        minute: 'numeric',  
-        second: 'numeric',  
-        hour12: true  
-      });  
-      const date = now.toDateString();  
-      document.getElementById("clock").textContent = `${date} • ${time}`;  
-    }  
-    setInterval(updateClock, 1000);  
-    updateClock();  
-  
-    const input = document.getElementById("searchInput");  
-    const clearBtn = document.getElementById("clearBtn");  
-  
-    input.addEventListener("input", () => {  
-      clearBtn.style.display = input.value ? "block" : "none";  
-    });  
-  
-    function clearSearch() {  
-      input.value = "";  
-      input.focus();  
-      clearBtn.style.display = "none";  
-    }  
-      </script>
+
+  <script>
+    // Time-based greeting
+    function updateGreeting() {
+      const hour = new Date().getHours();
+      const greeting = hour < 12 ? "Good morning" : 
+                      hour < 18 ? "Good afternoon" : "Good evening";
+      document.getElementById("greeting").textContent = `${greeting}, Bismark`;
+    }
+
+    // Format ordinal numbers (1st, 2nd, 3rd, etc.)
+    function getOrdinal(n) {
+      const s = ["th", "st", "nd", "rd"];
+      const v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
+    // Smooth clock function with timezone detection
+    function updateClock() {
+      const now = new Date();
+      
+      // Format time (4:06:25 pm)
+      const time = now.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+      
+      // Format date (Friday, 14th July, 2025)
+      const options = { 
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      };
+      let date = now.toLocaleDateString('en-US', options);
+      
+      // Add ordinal suffix to day
+      const day = now.getDate();
+      date = date.replace(/\d+/, getOrdinal(day));
+      
+      document.getElementById("clock").textContent = `${date} • ${time}`;
+      
+      // Schedule next update at the beginning of the next second
+      const delay = 1000 - now.getMilliseconds();
+      setTimeout(updateClock, delay);
+    }
+    
+    // Theme toggle functionality
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+
+    // Initialize theme from localStorage or prefer-color-scheme
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      
+      if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        document.body.classList.add('light-mode');
+      }
+    }
+
+    // Search functionality
+    const input = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("clearBtn");
+    const searchForm = document.getElementById("searchForm");
+
+    // Show/hide clear button
+    input.addEventListener("input", () => {
+      clearBtn.style.display = input.value ? "flex" : "none";
+    });
+
+    // Clear search
+    clearBtn.addEventListener("click", () => {
+      input.value = "";
+      input.focus();
+      clearBtn.style.display = "none";
+    });
+
+    // Handle search submission
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = input.value.trim();
+      if (!query) return;
+      
+      let url;
+      if (/^https?:\/\//i.test(query)) {
+        url = query;
+      } else if (/^[a-z0-9-]+\.[a-z]{2,}/i.test(query)) {
+        url = `https://${query}`;
+      } else {
+        url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      }
+      
+      window.open(url, '_blank');
+      input.value = "";
+      clearBtn.style.display = "none";
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '/' || (e.ctrlKey && e.key === 'k')) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      updateGreeting();
+      updateClock();
+      initTheme();
+      document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
+      input.focus();
+    });
+  </script>
 </body>
-  </html>
+</html>
